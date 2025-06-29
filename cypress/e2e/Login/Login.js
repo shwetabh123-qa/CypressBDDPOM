@@ -29,7 +29,7 @@ const Login_Elements=new loginpageElements
         When("I enter admin123 as password",()=>{
 
 
-            Login_Elements.password('admin123')
+            Login_Elements.password('admin1234')
         })
 
         Then("I click on the login button",()=>{
