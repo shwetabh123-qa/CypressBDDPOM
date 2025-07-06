@@ -33,7 +33,7 @@ steps:
   continueOnError: true
 - publish: $(System.DefaultWorkingDirectory)/mochawesome-report
   artifact: Report_$(browser)
-  condition: succeededorFailed()
+  condition: succeededOrFailed()
 - publish: $(System.DefaultWorkingDirectory)/cypress/screenshots
   artifact: Screenshots_$(browser)
-  condition: succeededorFailed()
+  condition: succeededOrFailed()
