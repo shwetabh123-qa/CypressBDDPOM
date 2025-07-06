@@ -1,0 +1,39 @@
+trigger:
+- master
+
+pool:
+  vmImage: ubuntu-latest
+container: cypress/browsers:latest
+
+strategy:
+  matrix:
+   chromeRun:
+      browser: chrome
+   firefoxRun:
+      browser: firefox
+   edgeRun:
+      browser: edge
+      
+
+
+
+steps:
+- task: NodeTool@0
+  inputs:
+    versionSpec: '20.x'
+  displayName: 'Install Node.js'
+
+- script: |
+    npm ci
+    npm install mochawesome
+  displayName: 'installation'
+- script: 
+    npx cypress run --browser $(browser) --reporter mochawesome --reporter-options "reportFilename=$(browser)-results"
+  displayName: 'run tests'
+  continueOnError: true
+- publish: $(System.DefaultWorkingDirectory)/mochawesome-report
+  artifact: Report_$(browser)
+  condition: succeededorFailed()
+- publish: $(System.DefaultWorkingDirectory)/cypress/screenshots
+  artifact: Screenshots_$(browser)
+  condition: succeededorFailed()
