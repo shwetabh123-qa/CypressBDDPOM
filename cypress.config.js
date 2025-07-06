@@ -29,7 +29,7 @@ specPattern:"cypress/e2e/feature/*.feature",
     reportPageTitle:'Shwetabh',
     embeddedScrenshots:true,
     saveAllAttempts:false,
-    //reportDir:'cypress/reports',
+    reportDir:'cypress/reports',
     overwrite:false,
     html:true,
     json:false
